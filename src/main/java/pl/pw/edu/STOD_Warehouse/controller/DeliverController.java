@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
+import pl.pw.edu.STOD_Warehouse.dto.AddDeliveryRequest;
 import pl.pw.edu.STOD_Warehouse.dto.AddProductRequest;
+import pl.pw.edu.STOD_Warehouse.entity.Delivery;
 import pl.pw.edu.STOD_Warehouse.entity.Product;
-import pl.pw.edu.STOD_Warehouse.services.ProductsService;
+import pl.pw.edu.STOD_Warehouse.services.DeliveryService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -17,28 +19,27 @@ import java.util.List;
 @Log
 @CrossOrigin
 @RestController
-@RequestMapping("/api/product")
-public class ProductController {
+@RequestMapping("/api/delivery")
+public class DeliverController {
 
     @Autowired
-    private ProductsService productsService;
-
+    private DeliveryService deliveryService;
 
     @GetMapping
-    public ResponseEntity<?> getPrducts(){
-        List<Product> respons = productsService.getAllProduct();
+    public ResponseEntity<?> getDelivery(){
+        List<Delivery> respons = deliveryService.getAllProduct();
         return new ResponseEntity<>( respons, HttpStatus.CREATED);
     }
 
     @PostMapping
-    public ResponseEntity<?> addProduct(@RequestBody @Valid AddProductRequest request){
-        productsService.addProduct(request.getName(),request.getPrice(),request.getQuantity(),request.getManufacturer());
+    public ResponseEntity<?> addDelivery(@RequestBody @Valid AddDeliveryRequest request){
+        deliveryService.addProduct(request.getFk_product_id(),request.getFk_supplier_id(),request.getQuantity(),request.getValue(),request.getDate());
         return new ResponseEntity<>( HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{name}")
-    public ResponseEntity<?> deleteProduct(@PathVariable String name){
-        productsService.deleteProduct(name);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteDelivery(@PathVariable Long id){
+        deliveryService.deleteProduct(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
