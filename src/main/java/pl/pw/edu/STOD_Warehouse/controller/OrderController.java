@@ -6,17 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.pw.edu.STOD_Warehouse.dto.AddDeliveryRequest;
 import pl.pw.edu.STOD_Warehouse.dto.AddOrderRequest;
-import pl.pw.edu.STOD_Warehouse.entity.Delivery;
-import pl.pw.edu.STOD_Warehouse.entity.Order;
+import pl.pw.edu.STOD_Warehouse.entity.Orderki;
 import pl.pw.edu.STOD_Warehouse.entity.Product;
 import pl.pw.edu.STOD_Warehouse.services.OrderService;
 import pl.pw.edu.STOD_Warehouse.services.ProductsService;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Log
@@ -34,13 +31,13 @@ public class OrderController {
 
     @GetMapping
     public ResponseEntity<?> getOrders(){
-        List<Order> respons = orderService.getAllorders();
+        List<Orderki> respons = orderService.getAllorders();
         return new ResponseEntity<>( respons, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getOrder(@PathVariable Long id){
-        Order order =  orderService.getOne(id);
+        Orderki order =  orderService.getOne(id);
         return new ResponseEntity<>( order,HttpStatus.OK);
     }
 

@@ -26,26 +26,26 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping
-    public ResponseEntity<?> getDelivery(){
+    public ResponseEntity<?> getCustomers(){
         List<Customer> respons = customerService.getAllCustomers();
         return new ResponseEntity<>( respons, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getDelivery(@PathVariable Long id){
+    public ResponseEntity<?> getCustomer(@PathVariable Long id){
         Customer customer =  customerService.getOne(id);
         return new ResponseEntity<>( customer,HttpStatus.OK);
     }
 
 
     @PostMapping
-    public ResponseEntity<?> addDelivery(@RequestBody @Valid AddCustomerRequest request){
+    public ResponseEntity<?> addCustomer(@RequestBody @Valid AddCustomerRequest request){
         customerService.addCustomer(request.getName(),request.getNIP(),request.getCity(),request.getPostal_code(),request.getBuilding_number(),request.getStreet());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteDelivery(@PathVariable Long id){
+    public ResponseEntity<?> deleteCustomer(@PathVariable Long id){
         customerService.deleteCustomer(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
