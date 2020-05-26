@@ -5,13 +5,12 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class AddSupplierRequest {
-
+public class AddClubEventRequest {
 
     @NotNull
     private String name;
 
     @NotNull
-    private Double quality;
+    private String headquarterId;
 
 }

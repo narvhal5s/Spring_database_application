@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.pw.edu.STOD_Warehouse.dto.AddSupplierRequest;
-import pl.pw.edu.STOD_Warehouse.entity.Supplier;
-import pl.pw.edu.STOD_Warehouse.services.SupplierService;
+import pl.pw.edu.STOD_Warehouse.dto.AddEventMemberRequest;
+import pl.pw.edu.STOD_Warehouse.entity.EventMember;
+import pl.pw.edu.STOD_Warehouse.services.EventMemberService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -16,33 +16,33 @@ import java.util.List;
 @Log
 @CrossOrigin
 @RestController
-@RequestMapping("/api/supplier")
-public class SupplierController {
+@RequestMapping("/api/eventmember")
+public class EventMemberController {
 
     @Autowired
-    private SupplierService supplierService;
+    private EventMemberService eventMemberService;
 
     @GetMapping
     public ResponseEntity<?> getSuppliers(){
-        List<Supplier> respons = supplierService.getAllSuppliers();
+        List<EventMember> respons = eventMemberService.getAllSuppliers();
         return new ResponseEntity<>( respons, HttpStatus.CREATED);
     }
 
     @PostMapping
-    public ResponseEntity<?> addSupplier(@RequestBody @Valid AddSupplierRequest request){
-        supplierService.addSupplier(request.getName(),request.getQuality());
+    public ResponseEntity<?> addSupplier(@RequestBody @Valid AddEventMemberRequest request){
+        eventMemberService.addSupplier(request.getMemberId(),request.getClubeventId());
         return new ResponseEntity<>( HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getSupplier(@PathVariable Long id){
-        Supplier supplier = supplierService.getOne(id);
+        EventMember supplier = eventMemberService.getOne(id);
         return new ResponseEntity<>(supplier,HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteSupplier(@PathVariable Long id){
-        supplierService.deleteSupplier(id);
+        eventMemberService.deleteSupplier(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

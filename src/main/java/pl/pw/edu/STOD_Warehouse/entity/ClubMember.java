@@ -15,21 +15,34 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-public class Product {
+public class ClubMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private String name;
+    private String firstName;
 
     @NotNull
-    private Double price;
+    private String lastName;
 
     @NotNull
-    private Long quantity;
+    private String address;
 
     @NotNull
-    private String manufacturer;
+    private String city;
+
+    @NotNull
+    private String phoneNumber;
+
+    @NotNull
+    private String email;
+
+    @NotNull
+    private Long headquarterId;
+
+    @NotNull
+    private Boolean contributionPaid;
+
 }

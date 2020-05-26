@@ -5,16 +5,15 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class AddOrderRequest {
-
-
-    @NotNull
-    private Long fk_product_id;
+public class AddEquipmentRequest {
 
     @NotNull
-    private Long fk_customer_id;
+    private String name;
 
     @NotNull
-    private Long quantity;
+    private String year;
+
+    @NotNull
+    private String headquarterId;
 
 }

@@ -1,5 +1,6 @@
 package pl.pw.edu.STOD_Warehouse.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-public class Supplier {
+public class ClubEvent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +25,6 @@ public class Supplier {
     private String name;
 
     @NotNull
-    private Double quality;
+    private String headquarterId;
 
 }

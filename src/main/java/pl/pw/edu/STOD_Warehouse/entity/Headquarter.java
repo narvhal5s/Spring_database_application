@@ -1,5 +1,6 @@
 package pl.pw.edu.STOD_Warehouse.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,25 +15,19 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-public class Delivery {
+public class Headquarter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private Long fk_product_id;
+    private String address;
 
     @NotNull
-    private Long fk_supplier_id;
+    private String city;
 
     @NotNull
-    private Long quantity;
-
-    @NotNull
-    private Double value;
-
-    @NotNull
-    private String date;
+    private String phoneNumber;
 
 }
