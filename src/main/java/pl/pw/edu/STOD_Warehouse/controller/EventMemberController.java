@@ -23,27 +23,31 @@ public class EventMemberController {
     private EventMemberService eventMemberService;
 
     @GetMapping
-    public ResponseEntity<?> getSuppliers(){
-        List<EventMember> respons = eventMemberService.getAllSuppliers();
-        return new ResponseEntity<>( respons, HttpStatus.CREATED);
+    public ResponseEntity<?> getSuppliers() {
+        List<EventMember> response = eventMemberService.getAllSuppliers();
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @PostMapping
-    public ResponseEntity<?> addSupplier(@RequestBody @Valid AddEventMemberRequest request){
-        eventMemberService.addSupplier(request.getMemberId(),request.getClubeventId());
-        return new ResponseEntity<>( HttpStatus.CREATED);
+    public ResponseEntity<?> addSupplier(@RequestBody @Valid AddEventMemberRequest request) {
+        eventMemberService.addSupplier(request.getMemberId(), request.getClubeventId());
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getSupplier(@PathVariable Long id){
+    public ResponseEntity<?> getSupplier(@PathVariable Long id) {
         EventMember supplier = eventMemberService.getOne(id);
-        return new ResponseEntity<>(supplier,HttpStatus.OK);
+        return new ResponseEntity<>(supplier, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteSupplier(@PathVariable Long id){
-        eventMemberService.deleteSupplier(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<?> deleteSupplier(@PathVariable Long id) {
+        long result = eventMemberService.deleteSupplier(id);
+        if (result == 0) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 }

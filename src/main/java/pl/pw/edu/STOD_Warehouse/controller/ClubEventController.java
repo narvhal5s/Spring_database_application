@@ -24,27 +24,31 @@ public class ClubEventController {
 
 
     @GetMapping
-    public ResponseEntity<?> getClubEvent(){
+    public ResponseEntity<?> getClubEvent() {
         List<ClubEvent> respons = clubEventService.getAllClubEvents();
-        return new ResponseEntity<>( respons, HttpStatus.CREATED);
+        return new ResponseEntity<>(respons, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getClubEvent(@PathVariable Long id){
+    public ResponseEntity<?> getClubEvent(@PathVariable Long id) {
         ClubEvent product = clubEventService.getOne(id);
-        return new ResponseEntity<>(product,HttpStatus.OK);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<?> addClubEvent(@RequestBody @Valid AddClubEventRequest request){
-        clubEventService.addClubEvent(request.getName(),request.getHeadquarterId());
-        return new ResponseEntity<>( HttpStatus.CREATED);
+    public ResponseEntity<?> addClubEvent(@RequestBody @Valid AddClubEventRequest request) {
+        clubEventService.addClubEvent(request.getName(), request.getHeadquarterId());
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteClubEvent(@PathVariable String name){
-        clubEventService.deleteClubEvent(name);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<?> deleteClubEvent(@PathVariable Long id) {
+        long result = clubEventService.deleteClubEvent(id);
+        if (result == 0) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 }

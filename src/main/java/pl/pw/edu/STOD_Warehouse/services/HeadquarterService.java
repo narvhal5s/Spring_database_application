@@ -17,9 +17,13 @@ public class HeadquarterService {
 
 
     public long deleteHeadquarter(Long id){
-        Headquarter toDelete = headquarterRepository.findById(id).get();
-        headquarterRepository.delete(toDelete);
-        return 0L;
+        if(headquarterRepository.findById(id).isPresent()) {
+            Headquarter toDelete = headquarterRepository.findById(id).get();
+            headquarterRepository.delete(toDelete);
+            return 0L;
+        } else  {
+            return 1L;
+        }
     }
 
     public Headquarter getOne(Long id){

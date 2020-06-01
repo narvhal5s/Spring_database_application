@@ -23,28 +23,32 @@ public class HeadquarterController {
     private HeadquarterService headquarterService;
 
     @GetMapping
-    public ResponseEntity<?> getHeadquarter(){
+    public ResponseEntity<?> getHeadquarter() {
         List<Headquarter> respons = headquarterService.getAllHeadquarters();
-        return new ResponseEntity<>( respons, HttpStatus.CREATED);
+        return new ResponseEntity<>(respons, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getHeadquarter(@PathVariable Long id){
-        Headquarter delivery =  headquarterService.getOne(id);
-        return new ResponseEntity<>( delivery,HttpStatus.OK);
+    public ResponseEntity<?> getHeadquarter(@PathVariable Long id) {
+        Headquarter delivery = headquarterService.getOne(id);
+        return new ResponseEntity<>(delivery, HttpStatus.OK);
     }
 
 
     @PostMapping
-    public ResponseEntity<?> addHeadquarter(@RequestBody @Valid AddHeadquarterRequest request){
-        Long headquarterId = headquarterService.addHeadquarter(request.getAddress(),request.getCity(),request.getPhoneNumber());
-        return new ResponseEntity<>( headquarterId ,HttpStatus.CREATED);
+    public ResponseEntity<?> addHeadquarter(@RequestBody @Valid AddHeadquarterRequest request) {
+        Long headquarterId = headquarterService.addHeadquarter(request.getAddress(), request.getCity(), request.getPhoneNumber());
+        return new ResponseEntity<>(headquarterId, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteHeadquarter(@PathVariable Long id){
-        headquarterService.deleteHeadquarter(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<?> deleteHeadquarter(@PathVariable Long id) {
+        long result = headquarterService.deleteHeadquarter(id);
+        if (result == 0) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 }

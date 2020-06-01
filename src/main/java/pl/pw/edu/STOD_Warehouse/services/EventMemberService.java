@@ -12,21 +12,25 @@ public class EventMemberService {
     @Autowired
     private EventMemberRepository eventMemberRepository;
 
-    public long addSupplier(Long memberId, Long headquarterId){
-        return eventMemberRepository.save(new EventMember(0L,memberId,headquarterId)).getId();
+    public long addSupplier(Long memberId, Long headquarterId) {
+        return eventMemberRepository.save(new EventMember(0L, memberId, headquarterId)).getId();
     }
 
-    public long deleteSupplier(Long id){
-        EventMember toDelete = eventMemberRepository.findById(id).get();
-        eventMemberRepository.delete(toDelete);
-        return 0L;
+    public long deleteSupplier(Long id) {
+        if (eventMemberRepository.findById(id).isPresent()) {
+            EventMember toDelete = eventMemberRepository.findById(id).get();
+            eventMemberRepository.delete(toDelete);
+            return 0L;
+        } else {
+            return 1L;
+        }
     }
 
     public EventMember getOne(Long id){
         return eventMemberRepository.getOne(id);
     }
 
-    public List<EventMember> getAllSuppliers(){
+    public List<EventMember> getAllSuppliers() {
         return eventMemberRepository.findAll();
     }
 
